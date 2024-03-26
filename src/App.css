@@ -96,6 +96,7 @@
     height: 1.5rem;
     color: var(--rose-500);
     background: none;
+    cursor: pointer;
   }
   
   .note-item__footer {
