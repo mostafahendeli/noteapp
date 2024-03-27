@@ -1,29 +1,34 @@
-function NoteList({ notes }) {
+function NoteList({ notes, onDelete, onChecked }) {
   return (
     <div className="note-list">
       {notes.map((note) => (
-        <NoteItem key={note.id} note={note} />
+        <NoteItem
+          key={note.id}
+          note={note}
+          onDelete={onDelete}
+          onChecked={onChecked}
+        />
       ))}
     </div>
   );
 }
 
 export default NoteList;
-function NoteItem({ note }) {
+function NoteItem({ note, onDelete, onChecked }) {
   const options = {
     year: "numeric",
     month: "long",
     day: "numeric",
   };
   return (
-    <div className="note-item">
+    <div className={`note-item ${note.isCompleted ? "completed" : ""}`}>
       <div className="note-item__header">
         <div>
           <p className="title">{note.title}</p>
           <p className="desc">{note.desc}</p>
         </div>
         <div className="actions">
-          <div className="trash">
+          <div className="trash" onClick={() => onDelete(note.id)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -39,8 +44,7 @@ function NoteItem({ note }) {
               />
             </svg>
           </div>
-
-          <input type="checkbox" />
+          <input type="checkbox" id={note.id} onChange={onChecked} />
         </div>
       </div>
       <div className="note-item__footer">

@@ -8,7 +8,7 @@ function AddNewNote({onAddNote }) {
     e.preventDefault();
     if (!title || !desc) return null;
     const newNote = {
-      id: new Date(),
+      id: Date.now(),
       title,
       desc,
       createdAt: new Date().toISOString(),
