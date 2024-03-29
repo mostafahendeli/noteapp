@@ -1,7 +1,21 @@
-function NoteList({ notes, onDelete, onChecked }) {
+function NoteList({ notes, onDelete, onChecked, sort }) {
+  let sortedNote = [];
+  if (sort === "latest")
+    sortedNote = [...notes].sort(
+      (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
+    );
+  if (sort === "earliest")
+    sortedNote = [...notes].sort(
+      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+    );
+  if (sort === "completed")
+    sortedNote = [...notes].sort(
+      (a, b) => Number(a.isCompleted) - Number(b.isCompleted)
+    );
+
   return (
     <div className="note-list">
-      {notes.map((note) => (
+      {sortedNote.map((note) => (
         <NoteItem
           key={note.id}
           note={note}
